@@ -8,9 +8,23 @@
 <body>
 
     <button onclick="btnClick()">Click Here for the JSON Data</button>
+
+    <p>
+        <p>Transaction: 
+            <p id="txNumber">Transaction ID: </p><br>
+            <p id="txTime">Time: </p><br>
+            <p id="txToken">Token: </p><br>
+            <p id="txTo">To: </p><br>
+            <p id="txFrom">From: </p><br>
+            <p id="txValue">Amount Transferred: </p><br>
+        </p>
+    </p>
+
     <p id="output">
 
     </p>
+
+
 
     <script type="text/javascript">
         //https://api-rinkeby.etherscan.io/api?module=account&action=tokentx&contractaddress=0xd355E44669ebCd1Af5d186832aae4C3E0A00042a&address=0x50174f5aeb1682099e1272ea5d9bcfbc92d1b25e&page=1&offset=100&sort=asc&apikey=RRWHPICGJT3464H9DQD6APCUPAS9CS6HP1
@@ -20,7 +34,7 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    document.getElementById("output").innerHTML = this.responseText;;
+                    //document.getElementById("output").innerHTML = this.responseText;;
                     console.log(this.responseText);
                 }
             };
