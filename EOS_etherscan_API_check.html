@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Web3JS is needed to handle the conversion from wei to ETH, as JS can only handle 64 Bit numbers -->
+    <script src="https://rawgit.com/murphyjohn/web3js1.0.0/master/dist/web3.min.js"></script>
+    <script>
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider); //if metamask is running this keeps using metamask as the web3 provider
+        } else {
+            // set the provider you want from Web3.providers
+            web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/61932283fbab4a23a7fc217ae7ff1124'));
+        }
+    </script>
+    <title>Etherscan API Test</title>
+</head>
+<body>
+
+    <button onclick="btnClick()">Click Here to get Transaction Data for the first transaction</button>
+
+
+    <p class="txData"> 
+        <p id="txHash">Transaction ID: </p><br>
+        <p id="txTime">Time: </p><br>
+        <p id="txToken">Token Symbol: </p><br>
+        <p id="txTo">To: </p><br>
+        <p id="txFrom">From: </p><br>
+        <p id="txValue">Amount Transferred: </p><br>
+        <p>***********************************</p><br>
+    </p>
+
+
+    <p id="output">
+
+    </p>
+
+
+
+    <script type="text/javascript">
+        //https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0&address=0x46f91f0025c303d66958fd84feec3605e9363067&page=1&offset=100&sort=asc&apikey=YourApiKeyToken
+        function btnClick() {
+            console.log("btnClick triggered");
+            var url = "https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0&address=0x46f91f0025c303d66958fd84feec3605e9363067&page=1&offset=100&sort=asc&apikey=YourApiKeyToken";
+            var xhttp = new XMLHttpRequest();
+
+            var jsonFile;
+            var txHash;
+            var txTime;
+            var txToken;
+            var txTo;
+            var txFrom;
+            var txValue;
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    //document.getElementById("output").innerHTML = this.responseText;;
+                    //console.log(this.responseText);
+                    //console.log(this.responseText.result[0].blockNumber);
+                   
+                    jsonFile = JSON.parse(this.responseText);
+
+                    txHash = jsonFile.result[0].hash;
+                    console.log(txHash);
+                    txTime = jsonFile.result[0].timeStamp;
+                    console.log(txTime);
+                    txToken = jsonFile.result[0].tokenSymbol;
+                    console.log(txToken);
+                    txTo = jsonFile.result[0].to;
+                    console.log(txTo);
+                    txFrom = jsonFile.result[0].from;
+                    console.log(txFrom);
+                    //txValue = jsonFile.result[0].value; //gives wrong value, may beed to use web3 for fromWei method?
+                    txValue =  web3.utils.fromWei(jsonFile.result[0].value, 'ether');
+                    console.log(txValue);
+
+                    document.getElementById("txHash").innerHTML = document.getElementById("txHash").innerHTML + txHash;
+                    document.getElementById("txTime").innerHTML = document.getElementById("txTime").innerHTML + txTime;
+                    document.getElementById("txToken").innerHTML = document.getElementById("txToken").innerHTML + txToken;
+                    document.getElementById("txTo").innerHTML = document.getElementById("txTo").innerHTML + txTo;
+                    document.getElementById("txFrom").innerHTML = document.getElementById("txFrom").innerHTML + txFrom;
+                    document.getElementById("txValue").innerHTML = document.getElementById("txValue").innerHTML + txValue + " " + txToken;
+                    
+
+                }
+            };
+            xhttp.open("GET", url, true);
+            xhttp.send();
+
+        }
+
+    </script>
+</body>
+</html>
