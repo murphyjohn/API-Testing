@@ -1,2 +1,2 @@
 # API-Testing
-Code to help learn how to use a REST API 
+Code I write to help me to learn how to use a REST API 
