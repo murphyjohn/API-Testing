@@ -38,11 +38,12 @@
 
 
     <script type="text/javascript">
-        //https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0&address=0x46f91f0025c303d66958fd84feec3605e9363067&page=1&offset=100&sort=asc&apikey=YourApiKeyToken
         function btnClick() {
             console.log("btnClick triggered");
+
             var url = "https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0&address=0x46f91f0025c303d66958fd84feec3605e9363067&page=1&offset=100&sort=asc&apikey=YourApiKeyToken";
-            var xhttp = new XMLHttpRequest();
+           
+           var xhttp = new XMLHttpRequest();
 
             var jsonFile;
             var txHash;
@@ -54,9 +55,6 @@
 
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    //document.getElementById("output").innerHTML = this.responseText;;
-                    //console.log(this.responseText);
-                    //console.log(this.responseText.result[0].blockNumber);
                    
                     jsonFile = JSON.parse(this.responseText);
 
