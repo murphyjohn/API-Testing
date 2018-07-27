@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Etherscan API Test</title>
+</head>
+<body>
+
+    <button onclick="btnClick()">Click Here for the JSON Data</button>
+    <p id="output">
+
+    </p>
+
+    <script type="text/javascript">
+        //https://api-rinkeby.etherscan.io/api?module=account&action=tokentx&contractaddress=0xd355E44669ebCd1Af5d186832aae4C3E0A00042a&address=0x50174f5aeb1682099e1272ea5d9bcfbc92d1b25e&page=1&offset=100&sort=asc&apikey=RRWHPICGJT3464H9DQD6APCUPAS9CS6HP1
+
+        function btnClick() {
+            console.log("btnClick triggered");
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("output").innerHTML = this.responseText;;
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "https://api-rinkeby.etherscan.io/api?module=account&action=tokentx&contractaddress=0xd355E44669ebCd1Af5d186832aae4C3E0A00042a&address=0x50174f5aeb1682099e1272ea5d9bcfbc92d1b25e&page=1&offset=100&sort=asc&apikey=RRWHPICGJT3464H9DQD6APCUPAS9CS6HP1", true);
+            xhttp.send();
+
+        }
+
+    </script>
+</body>
+</html>
