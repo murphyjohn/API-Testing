@@ -10,7 +10,7 @@
             web3 = new Web3(web3.currentProvider); //if metamask is running this keeps using metamask as the web3 provider
         } else {
             // set the provider you want from Web3.providers
-            web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/'));
+            web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/v3/61932283fbab4a23a7fc217ae7ff1124'));
         }
     </script>
     <title>Etherscan API Test</title>
@@ -43,7 +43,7 @@
 
             var url = "https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0&address=0x46f91f0025c303d66958fd84feec3605e9363067&page=1&offset=100&sort=asc&apikey=YourApiKeyToken";
            
-           var xhttp = new XMLHttpRequest();
+            var xhttp = new XMLHttpRequest();
 
             var jsonFile;
             var txHash;
@@ -68,7 +68,6 @@
                     console.log(txTo);
                     txFrom = jsonFile.result[0].from;
                     console.log(txFrom);
-                    //txValue = jsonFile.result[0].value; //gives wrong value, may beed to use web3 for fromWei method?
                     txValue =  web3.utils.fromWei(jsonFile.result[0].value, 'ether');
                     console.log(txValue);
 
